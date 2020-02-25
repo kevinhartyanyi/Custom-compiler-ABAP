@@ -1,0 +1,108 @@
+%option noyywrap c++ yylineno
+
+%{
+#include <iostream>
+#include <cstdlib>
+%}
+
+
+WS  [ \t\n]
+
+%%
+
+^"*".*              std::cout << "Comment: " << YYText() << std::endl;
+
+PROGRAM             std::cout << "Key: " << YYText() << std::endl;
+DATA[ ]*:           std::cout << "Key: " << YYText() << std::endl;
+
+WHILE               std::cout << "Key: " << YYText() << std::endl;
+ENDWHILE            std::cout << "Key: " << YYText() << std::endl;
+
+IF                  std::cout << "Key: " << YYText() << std::endl;
+ELSE                std::cout << "Key: " << YYText() << std::endl;
+ENDIF               std::cout << "Key: " << YYText() << std::endl;
+
+TYPE                std::cout << "Key: " << YYText() << std::endl;
+
+READ                std::cout << "Key: " << YYText() << std::endl;
+WRITE               std::cout << "Key: " << YYText() << std::endl;
+TO                  std::cout << "Key: " << YYText() << std::endl;
+FROM                std::cout << "Key: " << YYText() << std::endl;
+BY                  std::cout << "Key: " << YYText() << std::endl;
+
+MOVE                std::cout << "Key: " << YYText() << std::endl;
+
+ADD                 std::cout << "Arithmetic: " << YYText() << std::endl;
+SUBTRACT            std::cout << "Arithmetic: " << YYText() << std::endl;
+MULTIPLY            std::cout << "Arithmetic: " << YYText() << std::endl;
+DIVIDE              std::cout << "Arithmetic: " << YYText() << std::endl;
+MOD                 std::cout << "Arithmetic: " << YYText() << std::endl;
+
+">"                 std::cout << "Logic: " << YYText() << std::endl;
+"<"                 std::cout << "Logic: " << YYText() << std::endl;
+"="                 std::cout << "Logic: " << YYText() << std::endl;
+NOT                 std::cout << "Logic: " << YYText() << std::endl;
+AND                 std::cout << "Logic: " << YYText() << std::endl;
+OR                  std::cout << "Logic: " << YYText() << std::endl;
+
+"+"                 std::cout << "PLUS" << std::endl;
+"-"                 std::cout << "MINUS" << std::endl;
+"("                 std::cout << "OPEN" << std::endl;
+")"                 std::cout << "CLOSE" << std::endl;
+
+I                   std::cout << "Type: " << YYText() << std::endl;
+B                   std::cout << "Type: " << YYText() << std::endl;
+
+[a-z]+([0-9_])*     std::cout << "Variable: " << YYText() << std::endl;
+
+[0-9]+              std::cout << "Integer value: " << YYText() << std::endl;
+
+TRUE|FALSE          std::cout << "Boolean value: " << YYText() << std::endl;
+
+
+{WS}+       // feher szokozok: semmi teendo
+
+,           std::cout << "Separator: " << YYText() << std::endl;
+"."         std::cout << "End command: " << YYText() << std::endl;
+.           {
+                std::cerr << lineno() << ": Lexikalis hiba." << std::endl;
+                exit(1);
+            }
+
+%%
+###
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <FlexLexer.h>
+#include <cstdlib>
+
+using namespace std;
+
+
+
+void input_handler( ifstream& in, int argc, char* argv[] );
+
+int main( int argc, char* argv[] )
+{
+    ifstream in;
+    input_handler( in, argc, argv );
+    yyFlexLexer fl(&in, &cout);
+    fl.yylex();
+    return 0;
+}
+
+void input_handler( ifstream& in, int argc, char* argv[] )
+{
+    if( argc < 2 )
+    {
+        cerr << "A forditando fajl nevet parancssori parameterben kell megadni." << endl;
+        exit(1);
+    }
+    in.open( argv[1] );
+    if( !in )
+    {
+        cerr << "A " << argv[1] << "fajlt nem sikerult megnyitni." << endl;
+        exit(1);
+    }
+}

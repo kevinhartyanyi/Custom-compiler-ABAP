@@ -37,6 +37,8 @@ SUBTRACT            std::cout << "Arithmetic: " << YYText() << std::endl;
 MULTIPLY            std::cout << "Arithmetic: " << YYText() << std::endl;
 DIVIDE              std::cout << "Arithmetic: " << YYText() << std::endl;
 MOD                 std::cout << "Arithmetic: " << YYText() << std::endl;
+"+"                 std::cout << "Arithmetic: " << YYText() << std::endl;
+"-"                 std::cout << "Arithmetic: " << YYText() << std::endl;
 
 ">"                 std::cout << "Logic: " << YYText() << std::endl;
 "<"                 std::cout << "Logic: " << YYText() << std::endl;
@@ -45,10 +47,9 @@ NOT                 std::cout << "Logic: " << YYText() << std::endl;
 AND                 std::cout << "Logic: " << YYText() << std::endl;
 OR                  std::cout << "Logic: " << YYText() << std::endl;
 
-"+"                 std::cout << "PLUS" << std::endl;
-"-"                 std::cout << "MINUS" << std::endl;
-"("                 std::cout << "OPEN" << std::endl;
-")"                 std::cout << "CLOSE" << std::endl;
+
+"("                 std::cout << "Open: " << YYText() << std::endl;
+")"                 std::cout << "Close: " << YYText() << std::endl;
 
 I                   std::cout << "Type: " << YYText() << std::endl;
 B                   std::cout << "Type: " << YYText() << std::endl;
