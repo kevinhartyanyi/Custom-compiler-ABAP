@@ -13,7 +13,8 @@ WS  [ \t\n]
 ^"*".*              std::cout << "Comment: " << YYText() << std::endl;
 
 PROGRAM             std::cout << "Key: " << YYText() << std::endl;
-DATA[ ]*:           std::cout << "Key: " << YYText() << std::endl;
+DATA                std::cout << "Key: " << YYText() << std::endl;
+:                   std::cout << "Key: " << YYText() << std::endl;
 
 WHILE               std::cout << "Key: " << YYText() << std::endl;
 ENDWHILE            std::cout << "Key: " << YYText() << std::endl;
@@ -54,11 +55,12 @@ OR                  std::cout << "Logic: " << YYText() << std::endl;
 I                   std::cout << "Type: " << YYText() << std::endl;
 B                   std::cout << "Type: " << YYText() << std::endl;
 
-[a-z]+([0-9_])*     std::cout << "Variable: " << YYText() << std::endl;
+[a-z]+([0-9_a-z])*  std::cout << "Variable: " << YYText() << std::endl;
 
 [0-9]+              std::cout << "Integer value: " << YYText() << std::endl;
 
-TRUE|FALSE          std::cout << "Boolean value: " << YYText() << std::endl;
+TRUE                std::cout << "True value: " << YYText() << std::endl;
+FALSE               std::cout << "False value: " << YYText() << std::endl;
 
 
 {WS}+       // feher szokozok: semmi teendo
