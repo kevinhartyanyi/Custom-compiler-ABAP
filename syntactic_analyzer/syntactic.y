@@ -18,7 +18,7 @@
 %token END
 
 
-%left PLUS MINUS
+%left ADD SUBTRACT
 %left MULTIPLY DIVIDE MOD
 
 %left OR
