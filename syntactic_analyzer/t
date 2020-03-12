@@ -1,0 +1,8 @@
+* Osszegzes
+PROGRAM osszeg.
+
+IF a AND 10 AND.
+    WRITE a.
+ELSE.
+    WRITE b.
+ENDIF.
