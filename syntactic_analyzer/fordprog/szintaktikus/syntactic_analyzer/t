@@ -1,0 +1,61 @@
+sequence:
+    MOVE expression TO VAR END sequence
+    {
+        std::cout << "sequence -> MOVE expression TO VAR END sequence" << std::endl;
+    }
+|
+    MOVE expression TO VAR END
+    {
+        std::cout << "sequence -> MOVE expression TO VAR END" << std::endl;
+    }
+|
+    READ TO VAR END sequence
+    {
+        std::cout << "sequence -> READ TO VAR END sequence" << std::endl;
+    }
+|
+    READ TO VAR END
+    {
+        std::cout << "sequence -> READ TO VAR END" << std::endl;
+    }
+|
+    WRITE expression END sequence
+    {
+        std::cout << "sequence -> WRITE expression END sequence" << std::endl;
+    }
+|
+    WRITE expression END
+    {
+        std::cout << "sequence -> WRITE expression END" << std::endl;
+    }    
+|
+    WHILE logic END loop
+    {
+        std::cout << "sequence -> WHILE logic END loop" << std::endl;
+    }
+|
+    WHILE logic END loop sequence
+    {
+        std::cout << "sequence -> WHILE logic END loop sequence" << std::endl;
+    }
+|
+    IF logic END condition
+    {
+        std::cout << "sequence -> IF logic END condition" << std::endl;
+    }
+|
+    IF logic END condition sequence
+    {
+        std::cout << "sequence -> IF logic END condition sequence" << std::endl;
+    }
+|
+    arithmetic END
+    {
+        std::cout << "sequence -> arithmetic END" << std::endl;
+    }
+|
+    arithmetic END sequence
+    {
+        std::cout << "sequence -> arithmetic END sequence" << std::endl;
+    }
+;

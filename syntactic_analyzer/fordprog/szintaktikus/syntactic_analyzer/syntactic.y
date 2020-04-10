@@ -112,9 +112,9 @@ statement:
         std::cout << "sequence -> WRITE expression END" << std::endl;
     }    
 |
-    WHILE logic END loop
+    WHILE logic END sequence ENDWHILE END
     {
-        std::cout << "sequence -> WHILE logic END loop" << std::endl;
+        std::cout << "sequence -> WHILE logic END sequence ENDWHILE" << std::endl;
     }
 |
     READ TO VAR END
@@ -122,11 +122,17 @@ statement:
         std::cout << "sequence -> READ TO VAR END" << std::endl;
     }
 |
-    IF logic END condition
+    IF logic END sequence ENDIF END
     {
-        std::cout << "sequence -> IF logic END condition" << std::endl;
+        std::cout << "sequence -> IF logic END sequence ENDIF END" << std::endl;
+    }
+|
+    IF logic END sequence ELSE END sequence ENDIF END
+    {
+        std::cout << "sequence -> IF logic END sequence ELSE END sequence ENDIF END" << std::endl;
     }
 ;
+
 
 logic:
 	expression
@@ -180,25 +186,6 @@ logic:
     }
 ;
 
-loop:
-    sequence ENDWHILE END
-    {
-        std::cout << "loop -> sequence ENDWHILE" << std::endl;
-    }
-;
-
-condition:
-    sequence ENDIF END
-    {
-        std::cout << "condition -> sequence ENDIF END" << std::endl;
-    }
-|
-    sequence ELSE END sequence ENDIF END
-    {
-        std::cout << "condition -> sequence ELSE END sequence ENDIF END" << std::endl;
-    }
-;
-
 expression:
     VAR
     {
@@ -247,7 +234,6 @@ arithmetic:
         std::cout << "arithmetic -> MOD VAR BY expression TO VAR" << std::endl;
     }
 ;
-
 
 
 

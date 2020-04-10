@@ -1,0 +1,14 @@
+* Osszegzes
+PROGRAM osszeg.
+DATA:
+  s     TYPE I,
+  i     TYPE I,
+  more  TYPE B.
+
+IF 42 <= 6.
+    WRITE s.
+ELSE.
+    WRITE more.
+ENDIF.
+
+WRITE s.
