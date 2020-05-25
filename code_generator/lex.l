@@ -36,8 +36,7 @@ SUBTRACT            return Parser::SUBTRACT;
 MULTIPLY            return Parser::MULTIPLY;
 DIVIDE              return Parser::DIVIDE;
 MOD                 return Parser::MOD;
-"+"                 return Parser::PLUS;
-"-"                 return Parser::MINUS;
+
 
 ">"                 return Parser::BIGGER;
 "<"                 return Parser::SMALLER;

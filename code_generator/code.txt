@@ -1,0 +1,46 @@
+;Comment: * Osszegzes
+;vardeclaration -> VAR TYPE BOOL END
+;Változó deklaráció: more
+;vardeclaration -> VAR TYPE INT SEPARATOR vardeclaration
+;Változó deklaráció: i
+;vardeclaration -> VAR TYPE INT SEPARATOR vardeclaration
+;Változó deklaráció: s
+;expression -> NUM
+;sequence -> MOVE expression TO VAR END
+;sequence -> READ TO VAR END
+;expression -> VAR
+;sequence -> WRITE expression END
+;expression -> VAR
+;sequence -> WRITE expression END
+;sequence -> statement
+;sequence -> statement sequence
+;sequence -> statement sequence
+;sequence -> statement sequence
+;body -> sequence
+;declaration -> DATA DDOT vardeclaration body
+;start -> PROGRAM VAR END declaration
+;Változó deklaráció: osszeg
+extern ki_elojeles_egesz
+extern be_elojeles_egesz
+extern ki_logikai
+extern be_logikai
+global main
+section .bss
+s: resb 4
+i: resb 4
+more: resb 1
+section .text
+main:
+mov eax, 5
+mov [s], eax
+call be_logikai
+mov [more], eax
+mov eax, [s]
+push eax
+call ki_elojeles_egesz
+add esp, 4
+mov eax, [more]
+push eax
+call ki_logikai
+add esp, 4
+ret

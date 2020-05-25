@@ -8,7 +8,3 @@ MOVE 5 TO s.
 READ TO more.
 WRITE s.
 WRITE more.
-
-IF s = 10 OR NOT more.
-    READ TO more.
-ENDIF.

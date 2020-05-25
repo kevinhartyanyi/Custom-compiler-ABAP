@@ -27,7 +27,7 @@
 %token END
 
 
-%token ADD SUBTRACT PLUS MINUS
+%token ADD SUBTRACT
 %token MULTIPLY DIVIDE MOD
 
 
@@ -69,6 +69,7 @@ start:
         "extern ki_elojeles_egesz\n" +
         "extern be_elojeles_egesz\n" +
         "extern ki_logikai\n" +
+        "extern be_logikai\n" +
         "global main\n" +
         *$4;
     }
@@ -269,12 +270,24 @@ statement:
     WRITE expression END
     {
         std::cout << ";sequence -> WRITE expression END" << std::endl;
-        $$ = new std::string(std::string("") +
-            $2->code +
-            "push eax\n" + 
-            "call ki_elojeles_egesz\n" +
-            "add esp, 4\n"
-        );
+        if($2->var_type == natural)
+        {
+            $$ = new std::string(std::string("") +
+                $2->code +
+                "push eax\n" + 
+                "call ki_elojeles_egesz\n" +
+                "add esp, 4\n"
+            );
+        }
+        else if($2->var_type == boolean)
+        {
+            $$ = new std::string(std::string("") +
+                $2->code +
+                "push eax\n" + 
+                "call ki_logikai\n" +
+                "add esp, 4\n"
+            );
+        }        
     }    
 |
     WHILE logic END sequence ENDWHILE END
@@ -308,10 +321,20 @@ statement:
             ss << "Nem deklaralt valtozo: " << *$3 << ".\n" << std::endl;
             error( ss.str().c_str() );
         }
-        $$ = new std::string(std::string("") +
-            "call be_elojeles_egesz\n" +
-            "mov [" + *$3 + "], eax\n"
-        );
+        if(szimbolumtabla[*$3].var_type == natural)
+        {
+            $$ = new std::string(std::string("") +
+                "call be_elojeles_egesz\n" +
+                "mov [" + *$3 + "], eax\n"
+            );
+        }
+        else if(szimbolumtabla[*$3].var_type == boolean)
+        {
+            $$ = new std::string(std::string("") +
+                "call be_logikai\n" +
+                "mov [" + *$3 + "], eax\n"
+            );
+        }
     }
 |
     IF logic END sequence ENDIF END
